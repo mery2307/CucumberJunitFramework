@@ -3,6 +3,7 @@ package steps;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.*;
 import org.junit.jupiter.api.Assertions;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -82,5 +83,11 @@ public class PatientSteps extends BaseUI {
         waitAndSendKeys(patientsPage.searchPatientInput, firstName);
 
         Assertions.assertTrue(patientsPage.isNamePresentInTable(firstName));
+    }
+
+    @Then("delete patient")
+    public void delete_patient() {
+        waitAndSendKeys(patientsPage.searchPatientInput, this.patientInfo.get("phone"));
+        waitAndClick(driver.findElement(By.xpath("//button[contains(@data-testid, 'delete-patient')]")));
     }
 }

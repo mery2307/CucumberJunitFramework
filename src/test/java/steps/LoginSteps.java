@@ -1,10 +1,10 @@
 package steps;
 
-import io.cucumber.java.en.*;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.DashboardPage;
 import pages.LoginPage;
 import utils.BaseUI;
@@ -18,12 +18,15 @@ public class LoginSteps extends BaseUI {
     DashboardPage dashboardPage = new DashboardPage();
 
     @Given("user goes to sign in page")
-    public void bena() {
+    public boolean bena() {
         driver.get(ConfigurationReader.getProperty("loginURL"));
+        return true;
     }
 
     @When("user enters username {string}")
     public void user_enters_username(String username) {
+        boolean b = bena();
+        System.out.println(b);
         waitAndSendKeys(loginPage.email, username);
     }
 

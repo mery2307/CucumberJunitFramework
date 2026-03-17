@@ -8,15 +8,15 @@ import utils.Driver;
 
 public class Hooks extends BaseUI {
 
-    @Before
-    public void setup(){
-        Driver.getDriver().get(ConfigurationReader.getProperty("loginURL"));
-    }
+//    @Before
+//    public void setup(){
+//        Driver.getDriver().get(ConfigurationReader.getProperty("loginURL"));
+//    }
 
-    @After // runs after each scenario
-    public void cleanup(){
-        waitAndClick(new DashboardPage().logoutButton);
-    }
+//    @After // runs after each scenario
+//    public void cleanup(){
+//        waitAndClick(new DashboardPage().logoutButton);
+//    }
 
     @BeforeAll
     public static void beforeAll(){
