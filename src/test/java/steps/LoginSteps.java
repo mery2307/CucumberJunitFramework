@@ -3,11 +3,9 @@ package steps;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import pages.Dashboard;
+import pages.DashboardPage;
 import pages.LoginPage;
 import utils.BaseUI;
 import utils.ConfigurationReader;
@@ -17,34 +15,42 @@ public class LoginSteps extends BaseUI {
 
     WebDriver driver = Driver.getDriver();
     LoginPage loginPage = new LoginPage();
-    Dashboard dashboard = new Dashboard();
+    DashboardPage dashboardPage = new DashboardPage();
 
     @Given("user goes to sign in page")
-    public void Mery() {
+    public boolean bena() {
         driver.get(ConfigurationReader.getProperty("loginURL"));
-
+        return true;
     }
+
     @When("user enters username {string}")
     public void user_enters_username(String username) {
-     waitAndSendKeys(loginPage.email, username);
-
+        boolean b = bena();
+        System.out.println(b);
+        waitAndSendKeys(loginPage.email, username);
     }
+
     @When("user enters password {string}")
     public void user_enters_password(String password) {
         waitAndSendKeys(loginPage.password, password);
-
     }
-    @When("user enters clicks on sign in button")
-    public void user_enters_clicks_on_sign_in_button() {
-        waitAndClick(loginPage.singInButton);
 
+    @When("user clicks on sign in button")
+    public void udsvsdv() {
+        waitAndClick(loginPage.signInButton);
     }
+
     @Then("verify user signed in successfully")
     public void verify_user_signed_in_successfully() {
-        waitUntilVisible(20, dashboard.welcomeSing);
-        Assert.assertTrue(dashboard.welcomeSing.isDisplayed());
-        waitAndClick(dashboard.singOutB);
+        waitUntilVisible(20, dashboardPage.welcomeSign);
+        Assertions.assertTrue(dashboardPage.welcomeSign.isDisplayed());
+        waitAndClick(dashboardPage.logoutButton);
     }
 
+    @Then("verify user failed to sign in")
+    public void verify_user_failed_to_sign_in() throws InterruptedException {
+        Thread.sleep(1000);
+        Assertions.assertTrue(driver.getCurrentUrl().contains("/login"));
+    }
 
 }

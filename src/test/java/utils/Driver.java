@@ -12,18 +12,24 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Driver {
+
     /*
- WebDriver driver = new ChromeDriver();
- WebDriver driver = Driver.getDriver()
-  */
-    static WebDriver driver;
+    WebDriver driver = new ChromeDriver();
+    WebDriver driver = Driver.getDriver()
+     */
+    public static WebDriver driver;
 
     public static WebDriver getDriver(){
 
         String browser = ConfigurationReader.getProperty("browser");
 
         if (driver != null) {
-            return driver;
+            try {
+                driver.getTitle(); // any lightweight command
+                return driver;
+            } catch (Exception ignored) {
+                closeDriver(); // session is dead
+            }
         }
 
         ChromeOptions options = new ChromeOptions();
@@ -67,13 +73,14 @@ public class Driver {
 
         return driver;
     }
+
     public static void closeDriver() {
-        if (driver != null) {      // si el driver existe
-            driver.quit();          // cierra el navegador
-            driver = null;          // reinicia para futuras llamadas
+        if (driver != null) {
+            try {
+                driver.quit();
+            } finally {
+                driver = null;
+            }
         }
     }
 }
-
-
-

@@ -1,24 +1,55 @@
 Feature: all login related test scenarios
 
-Scenario: verify doctor can login login successfully
-
-  Given user goes to sign in page
-  When user enters username "dr.chen@mediflow.com"
-  And user enters password "Test@1234"
-  And user enters clicks on sign in button
-  Then verify user signed in successfully
-
-
-  Scenario: verify nurse can login login successfully
+  Background:
     Given user goes to sign in page
-    When user enters username "nurse.garcia@mediflow.com"
+
+    @codewise
+  Scenario: verify doctor can login successfully
+    When user enters username "dr.chen@mediflow.com"
     And user enters password "Test@1234"
-    And user enters clicks on sign in button
+    And user clicks on sign in button
     Then verify user signed in successfully
 
-  Scenario: verify manager can login login successfully
-    Given user goes to sign in page
-    When user enters username "mgr.wilson@mediflow.com"
-    And user enters password "Test@1234"
-    And user enters clicks on sign in button
-    Then verify user signed in successfully
+#
+#  Scenario: verify nurse can login successfully
+#    When user enters username "nurse.garcia@mediflow.com"
+#    And user enters password "Test@1234"
+#    And user clicks on sign in button
+#    Then verify user signed in successfully
+#
+#  Scenario: verify office manager can login successfully
+#    When user enters username "mgr.wilson@mediflow.com"
+#    And user enters password "Test@1234"
+#    And user clicks on sign in button
+#    Then verify user signed in successfully
+
+#  @usersLogin @multiple @abc @zyx
+#  Scenario Outline: verify all types of users can login
+#    When user enters username "<username>"
+#    And user enters password "<password>"
+#    And user clicks on sign in button
+#    Then verify user signed in successfully
+#    Examples:
+#      | username                  | password  |
+#      | dr.chen@mediflow.com      | Test@1234 |
+#      | mgr.wilson@mediflow.com   | Test@1234 |
+#      | nurse.garcia@mediflow.com | Test@1234 |
+#
+#  @usersLogin @multiple @abc @zyx
+#  Scenario Outline: verify all types of users fail to login with invalid credentials
+#    When user enters username "<username>"
+#    And user enters password "<password>"
+#    And user clicks on sign in button
+#    Then verify user failed to sign in
+#    Examples:
+#      | username                | password  |
+#      | dr@mediflow.com         | Test@1234 |
+#      | mgr.wilson@mediflow.com | TEST@1234 |
+#      |                         | Test@1234 |
+#      | mgr.wilson@mediflow.com |           |
+#      |                         |           |
+
+
+
+#    command + option + shift + L  ===> to format your file
+

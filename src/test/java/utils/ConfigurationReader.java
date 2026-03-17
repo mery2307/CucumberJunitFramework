@@ -6,19 +6,19 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class ConfigurationReader {
-    public static String getProperty(String key) {
+
+    public static String getProperty(String key){
 
         File file = new File("src/test/resources/configurations.properties");
         Properties properties = new Properties();
 
         try {
             properties.load(new FileInputStream(file));
-        } catch (IOException e) {
+        } catch (IOException e){
             System.out.println("Wrong file path provided for configurations file");
             throw new RuntimeException();
         }
         return properties.getProperty(key);
     }
+
 }
-
-
